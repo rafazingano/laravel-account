@@ -16,7 +16,8 @@
         }
     ],
     "require": {
-        "confrariaweb/laravel-user": "dev-master"
+        "confrariaweb/laravel-user": "dev-master",
+        "confrariaweb/laravel-vendor": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -27,7 +28,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ConfrariaWeb\\Account\\Providers\\AccountServiceProvider"
+                "ConfrariaWeb\\Account\\Providers\\AccountServiceProvider",
+                "ConfrariaWeb\\Account\\Providers\\AccountEventServiceProvider"
             ]
         }
     },
