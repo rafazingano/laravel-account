@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $plan = DB::table('plans')->find(1);
+        $plan = DB::table('account_plans')->find(1);
         if (empty($plan)) {
-            DB::table('plans')->insert([
+            DB::table('account_plans')->insert([
                 'status' => 1,
                 'name' => 'Free',
                 'price' => 0,
@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder {
             ]);
         }
 
-        if (DB::table('accounts')->where('user_id', 1)->doesntExist()) {
+        if (DB::table('accounts')->where('id', 1)->doesntExist()) {
             DB::table('accounts')->insert([
                 'status' => 1,
                 'plan_id' => 1,
-                'user_id' => 1,
+                //'user_id' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);

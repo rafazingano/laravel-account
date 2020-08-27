@@ -13,7 +13,7 @@ class CreatePlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create('account_plans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->decimal('price', 8, 2);
@@ -29,6 +29,6 @@ class CreatePlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('account_plans');
     }
 }

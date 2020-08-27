@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAccountToDomainsTable extends Migration {
+class AddAccountToUsersTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddAccountToDomainsTable extends Migration {
      * @return void
      */
     public function up() {
-        if (Schema::hasTable('domains') && !Schema::hasColumn('domains', 'account_id')) {
-            Schema::table('domains', function (Blueprint $table) {
+        if (!Schema::hasColumn('users', 'account_id')) {
+            Schema::table('users', function (Blueprint $table) {
                 $table->unsignedBigInteger('account_id')
                         ->nullable()
                         ->after('id');
@@ -33,8 +33,8 @@ class AddAccountToDomainsTable extends Migration {
      * @return void
      */
     public function down() {
-        if (Schema::hasTable('domains') && Schema::hasColumn('domains', 'account_id')) {
-            Schema::table('domains', function (Blueprint $table) {
+        if (Schema::hasColumn('users', 'account_id')) {
+            Schema::table('users', function (Blueprint $table) {
                 $table->dropForeign(['account_id']);
                 $table->dropColumn('account_id');
             });

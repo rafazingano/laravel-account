@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAccountToDomainsTable extends Migration {
+class AddAccountToEntrustTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class AddAccountToDomainsTable extends Migration {
      * @return void
      */
     public function up() {
-        if (Schema::hasTable('domains') && !Schema::hasColumn('domains', 'account_id')) {
-            Schema::table('domains', function (Blueprint $table) {
+
+        if (!Schema::hasColumn(config('cw_entrust.roles_table'), 'account_id')) {
+            Schema::table(config('cw_entrust.roles_table'), function (Blueprint $table) {
                 $table->unsignedBigInteger('account_id')
                         ->nullable()
                         ->after('id');
@@ -25,6 +26,7 @@ class AddAccountToDomainsTable extends Migration {
                         ->onDelete('cascade');
             });
         }
+
     }
 
     /**
@@ -33,12 +35,14 @@ class AddAccountToDomainsTable extends Migration {
      * @return void
      */
     public function down() {
-        if (Schema::hasTable('domains') && Schema::hasColumn('domains', 'account_id')) {
-            Schema::table('domains', function (Blueprint $table) {
+
+        if (Schema::hasColumn(config('cw_entrust.roles_table'), 'account_id')) {
+            Schema::table(config('cw_entrust.roles_table'), function (Blueprint $table) {
                 $table->dropForeign(['account_id']);
                 $table->dropColumn('account_id');
             });
         }
+
     }
 
 }
