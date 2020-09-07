@@ -10,4 +10,6 @@ Route::middleware(['web', 'auth'])
 
         Route::resource('accounts', 'AccountController');
 
+        Route::resource('plans', 'PlanController');
+
     });
