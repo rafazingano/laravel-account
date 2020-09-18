@@ -11,16 +11,16 @@ class Account extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'plan_id', 'user_id'
+        'plan_id'
     ];
     
     public function plan()
     {
-        return $this->belongsTo('App\Plan');
+        return $this->belongsTo('ConfrariaWeb\Account\Models\Plan');
     }
     
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->hasMany('App\Models\User');
     }
 }

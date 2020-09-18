@@ -16,6 +16,7 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('plan_id');
+            //$table->unsignedBigInteger('user_id');
             $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
@@ -25,6 +26,10 @@ class CreateAccountsTable extends Migration
                 ->on('account_plans')
                 ->onDelete('cascade');
 
+            /*$table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');*/
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAccountToEntrustTable extends Migration {
+class AddAccountToFinancialsTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,9 +12,8 @@ class AddAccountToEntrustTable extends Migration {
      * @return void
      */
     public function up() {
-
-        if (!Schema::hasColumn(config('cw_entrust.roles_table'), 'account_id')) {
-            Schema::table(config('cw_entrust.roles_table'), function (Blueprint $table) {
+        if (!Schema::hasColumn('financial_invoices', 'account_id')) {
+            Schema::table('financial_invoices', function (Blueprint $table) {
                 $table->unsignedBigInteger('account_id')
                         ->nullable()
                         ->after('id');
@@ -26,7 +25,6 @@ class AddAccountToEntrustTable extends Migration {
                         ->onDelete('cascade');
             });
         }
-
     }
 
     /**
@@ -35,14 +33,12 @@ class AddAccountToEntrustTable extends Migration {
      * @return void
      */
     public function down() {
-
-        if (Schema::hasColumn(config('cw_entrust.roles_table'), 'account_id')) {
-            Schema::table(config('cw_entrust.roles_table'), function (Blueprint $table) {
+        if (Schema::hasColumn('financial_invoices', 'account_id')) {
+            Schema::table('financial_invoices', function (Blueprint $table) {
                 $table->dropForeign(['account_id']);
                 $table->dropColumn('account_id');
             });
         }
-
     }
 
 }

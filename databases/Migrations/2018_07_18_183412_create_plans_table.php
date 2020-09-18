@@ -27,7 +27,7 @@ class CreatePlansTable extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('option_plan', function (Blueprint $table) {
+        Schema::create('account_plan_option', function (Blueprint $table) {
             $table->unsignedBigInteger('option_id');
             $table->unsignedBigInteger('plan_id');
 
@@ -54,7 +54,7 @@ class CreatePlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('option_plan');
+        Schema::dropIfExists('account_plan_option');
         Schema::dropIfExists('account_plans');
     }
 }

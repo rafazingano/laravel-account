@@ -2,16 +2,16 @@
 
 namespace ConfrariaWeb\Account\Observers;
 
-use ConfrariaWeb\Entrust\Models\Role;
+use ConfrariaWeb\Acl\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
 class RoleObserver
 {
 
     /**
-     * Handle the confraria web entrust models role "retrieved" event.
+     * Handle the confraria web acl models role "retrieved" event.
      *
-     * @param \ConfrariaWeb\Entrust\Models\Role  #role
+     * @param \ConfrariaWeb\Acl\Models\Role  #role
      * @return void
      */
     public function retrieved(Role $role)
@@ -20,9 +20,9 @@ class RoleObserver
     }
 
     /**
-     * Handle the confraria web entrust models role "creating" event.
+     * Handle the confraria web acl models role "creating" event.
      *
-     * @param \ConfrariaWeb\Entrust\Models\Role  #role
+     * @param \ConfrariaWeb\Acl\Models\Role  #role
      * @return void
      */
     public function creating(Role $role)
@@ -31,9 +31,9 @@ class RoleObserver
     }
 
     /**
-     * Handle the confraria web entrust models role "created" event.
+     * Handle the confraria web acl models role "created" event.
      *
-     * @param \ConfrariaWeb\Entrust\Models\Role  #role
+     * @param \ConfrariaWeb\Acl\Models\Role  #role
      * @return void
      */
     public function created(Role $role)
@@ -42,7 +42,7 @@ class RoleObserver
     }
 
     /**
-     * Handle the confraria web entrust models role "updated" event.
+     * Handle the confraria web acl models role "updated" event.
      *
      * @param \Role $role
      * @return void
@@ -53,7 +53,7 @@ class RoleObserver
     }
 
     /**
-     * Handle the confraria web entrust models role "deleted" event.
+     * Handle the confraria web acl models role "deleted" event.
      *
      * @param \Role $role
      * @return void
@@ -64,7 +64,7 @@ class RoleObserver
     }
 
     /**
-     * Handle the confraria web entrust models role "restored" event.
+     * Handle the confraria web acl models role "restored" event.
      *
      * @param \Role $role
      * @return void
@@ -75,7 +75,7 @@ class RoleObserver
     }
 
     /**
-     * Handle the confraria web entrust models role "force deleted" event.
+     * Handle the confraria web acl models role "force deleted" event.
      *
      * @param \Role $role
      * @return void
