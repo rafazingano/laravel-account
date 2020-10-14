@@ -4,16 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAccountToAclTable extends Migration {
+class AddAccountToAclTable extends Migration
+{
 
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-
-        if (!Schema::hasColumn(config('cw_acl.roles_table'), 'account_id')) {
+    public function up()
+    {
+        /*if (!Schema::hasColumn(config('cw_acl.roles_table'), 'account_id')) {
             Schema::table(config('cw_acl.roles_table'), function (Blueprint $table) {
                 $table->unsignedBigInteger('account_id')
                         ->nullable()
@@ -25,8 +26,7 @@ class AddAccountToAclTable extends Migration {
                         ->onUpdate('cascade')
                         ->onDelete('cascade');
             });
-        }
-
+        }*/
     }
 
     /**
@@ -34,15 +34,14 @@ class AddAccountToAclTable extends Migration {
      *
      * @return void
      */
-    public function down() {
-
-        if (Schema::hasColumn(config('cw_acl.roles_table'), 'account_id')) {
+    public function down()
+    {
+        /*if (Schema::hasColumn(config('cw_acl.roles_table'), 'account_id')) {
             Schema::table(config('cw_acl.roles_table'), function (Blueprint $table) {
                 $table->dropForeign(['account_id']);
                 $table->dropColumn('account_id');
             });
-        }
-
+        }*/
     }
 
 }

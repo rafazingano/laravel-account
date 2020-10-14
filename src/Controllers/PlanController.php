@@ -19,12 +19,12 @@ class PlanController extends Controller
     public function index()
     {
         $data['plans'] = resolve('PlanService')->all();
-        return view(Config::get('cw_account.views') . 'plans.index');
+        return view(cwView('plans.index', true), $this->data);
     }
 
     public function create()
     {
-        return view(Config::get('cw_account.views') . 'plans.create');
+        return view(cwView('plans.create', true), $this->data);
     }
 
     public function store(Request $request)

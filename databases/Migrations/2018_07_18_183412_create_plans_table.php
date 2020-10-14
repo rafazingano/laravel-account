@@ -26,25 +26,6 @@ class CreatePlansTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-        Schema::create('account_plan_option', function (Blueprint $table) {
-            $table->unsignedBigInteger('option_id');
-            $table->unsignedBigInteger('plan_id');
-
-            $table->foreign('option_id')
-                ->references('id')
-                ->on('options')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('plan_id')
-                ->references('id')
-                ->on('account_plans')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->primary(['option_id', 'plan_id']);
-        });
     }
 
     /**
@@ -54,7 +35,6 @@ class CreatePlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account_plan_option');
         Schema::dropIfExists('account_plans');
     }
 }

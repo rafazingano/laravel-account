@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Event;
 class AccountEventServiceProvider extends ServiceProvider {
 
     protected $listen = [
-        Registered::class => [
+        /*Registered::class => [
             addAccountToRegisteredUser::class,
         ],
         UserCreatedEvent::class => [
             addAccountToCreatedUser::class,
-        ],
+        ],*/
     ];
 
     public function boot() {

@@ -27,7 +27,7 @@ class RoleObserver
      */
     public function creating(Role $role)
     {
-        $role->account_id = Auth::user()->account_id;
+        //$role->account_id = Auth::user()->account_id;
     }
 
     /**

@@ -12,7 +12,7 @@ class AddAccountToFinancialsTable extends Migration {
      * @return void
      */
     public function up() {
-        if (!Schema::hasColumn('financial_invoices', 'account_id')) {
+        /*if (!Schema::hasColumn('financial_invoices', 'account_id')) {
             Schema::table('financial_invoices', function (Blueprint $table) {
                 $table->unsignedBigInteger('account_id')
                         ->nullable()
@@ -24,7 +24,7 @@ class AddAccountToFinancialsTable extends Migration {
                         ->onUpdate('cascade')
                         ->onDelete('cascade');
             });
-        }
+        }*/
     }
 
     /**
@@ -33,12 +33,12 @@ class AddAccountToFinancialsTable extends Migration {
      * @return void
      */
     public function down() {
-        if (Schema::hasColumn('financial_invoices', 'account_id')) {
+        /*if (Schema::hasColumn('financial_invoices', 'account_id')) {
             Schema::table('financial_invoices', function (Blueprint $table) {
                 $table->dropForeign(['account_id']);
                 $table->dropColumn('account_id');
             });
-        }
+        }*/
     }
 
 }

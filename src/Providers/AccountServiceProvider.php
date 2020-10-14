@@ -2,15 +2,19 @@
 
 namespace ConfrariaWeb\Account\Providers;
 
+use App\Models\User;
 use ConfrariaWeb\Account\Commands\GenerateInvoices;
 use ConfrariaWeb\Account\Contracts\AccountContract;
 use ConfrariaWeb\Account\Contracts\PlanContract;
+use ConfrariaWeb\Account\Observers\RoleObserver;
+use ConfrariaWeb\Account\Observers\SiteObserver;
+use ConfrariaWeb\Account\Observers\UserObserver;
 use ConfrariaWeb\Account\Repositories\AccountRepository;
 use ConfrariaWeb\Account\Repositories\PlanRepository;
 use ConfrariaWeb\Account\Services\AccountService;
 use ConfrariaWeb\Account\Services\PlanService;
-use ConfrariaWeb\Account\Observers\RoleObserver;
 use ConfrariaWeb\Acl\Models\Role;
+use ConfrariaWeb\Site\Models\Site;
 use ConfrariaWeb\Vendor\Traits\ProviderTrait;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +32,8 @@ class AccountServiceProvider extends ServiceProvider
         $this->registerSeedsFrom(__DIR__ . '/../../databases/Seeds');
 
         Role::observe(RoleObserver::class);
+        Site::observe(SiteObserver::class);
+        User::observe(UserObserver::class);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
