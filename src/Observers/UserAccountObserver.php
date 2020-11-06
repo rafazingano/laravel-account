@@ -3,8 +3,10 @@
 namespace ConfrariaWeb\Account\Observers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 
-class UserObserver
+class UserAccountObserver
 {
 
     /**
@@ -27,10 +29,11 @@ class UserObserver
      */
     public function created(User $user)
     {
-        /*if (existsAccount()) {
-            $accountId = accountID();
-            $user->sync($accountId);
-        }*/
+        $account = Session::get('account');
+        $account_id = isset($account) ? $account->id : Config::get('cw_account.default.account');
+        if ($account_id) {
+            $user->accounts()->sync($account_id);
+        }
     }
 
     /**

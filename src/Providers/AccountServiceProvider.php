@@ -6,14 +6,20 @@ use App\Models\User;
 use ConfrariaWeb\Account\Commands\GenerateInvoices;
 use ConfrariaWeb\Account\Contracts\AccountContract;
 use ConfrariaWeb\Account\Contracts\PlanContract;
-use ConfrariaWeb\Account\Observers\RoleObserver;
-use ConfrariaWeb\Account\Observers\SiteObserver;
-use ConfrariaWeb\Account\Observers\UserObserver;
+use ConfrariaWeb\Account\Observers\PostAccountObserver;
+use ConfrariaWeb\Account\Observers\PostCategoryAccountObserver;
+use ConfrariaWeb\Account\Observers\PostSectionAccountObserver;
+use ConfrariaWeb\Account\Observers\RoleAccountObserver;
+use ConfrariaWeb\Account\Observers\SiteAccountObserver;
+use ConfrariaWeb\Account\Observers\UserAccountObserver;
 use ConfrariaWeb\Account\Repositories\AccountRepository;
 use ConfrariaWeb\Account\Repositories\PlanRepository;
 use ConfrariaWeb\Account\Services\AccountService;
 use ConfrariaWeb\Account\Services\PlanService;
 use ConfrariaWeb\Acl\Models\Role;
+use ConfrariaWeb\Post\Models\Post;
+use ConfrariaWeb\Post\Models\PostCategory;
+use ConfrariaWeb\Post\Models\PostSection;
 use ConfrariaWeb\Site\Models\Site;
 use ConfrariaWeb\Vendor\Traits\ProviderTrait;
 use Illuminate\Support\ServiceProvider;
@@ -29,11 +35,14 @@ class AccountServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Views', 'account');
         $this->loadMigrationsFrom(__DIR__ . '/../../databases/Migrations');
         $this->publishes([__DIR__ . '/../../config/cw_account.php' => config_path('cw_account.php')], 'config');
-        $this->registerSeedsFrom(__DIR__ . '/../../databases/Seeds');
+        //$this->registerSeedsFrom(__DIR__ . '/../../databases/Seeds');
 
-        Role::observe(RoleObserver::class);
-        Site::observe(SiteObserver::class);
-        User::observe(UserObserver::class);
+        Post::observe(PostAccountObserver::class);
+        PostCategory::observe(PostCategoryAccountObserver::class);
+        PostSection::observe(PostSectionAccountObserver::class);
+        Role::observe(RoleAccountObserver::class);
+        Site::observe(SiteAccountObserver::class);
+        User::observe(UserAccountObserver::class);
 
         if ($this->app->runningInConsole()) {
             $this->commands([

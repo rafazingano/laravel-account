@@ -3,9 +3,10 @@
 namespace ConfrariaWeb\Account\Observers;
 
 use ConfrariaWeb\Site\Models\Site;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 
-class SiteObserver
+class SiteAccountObserver
 {
 
     /**
@@ -28,8 +29,9 @@ class SiteObserver
     public function created(Site $site)
     {
         $account = Session::get('account');
-        if($account ) {
-            $site->accounts()->sync($account->id);
+        $account_id = isset($account) ? $account->id : Config::get('cw_account.default.account');
+        if ($account_id) {
+            $site->accounts()->sync($account_id);
         }
     }
 

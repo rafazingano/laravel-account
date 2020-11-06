@@ -3,8 +3,10 @@
 namespace ConfrariaWeb\Account\Observers;
 
 use ConfrariaWeb\Domain\Models\Domain;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 
-class DomainObserver
+class DomainAccountObserver
 {
     /**
      * Handle the domain "created" event.
@@ -15,8 +17,9 @@ class DomainObserver
     public function created(Domain $domain)
     {
         $account = Session::get('account');
-        if($account ) {
-            $domain->accounts()->sync($account->id);
+        $account_id = isset($account) ? $account->id : Config::get('cw_account.default.account');
+        if ($account_id) {
+            $domain->accounts()->sync($account_id);
         }
     }
 

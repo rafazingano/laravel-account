@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class DatabaseSeeder extends Seeder
+class AccountSeeder extends Seeder
 {
 
     /**
@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (DB::table('account_plans')->where('id', 1)->doesntExist()) {
+        /*if (DB::table('account_plans')->where('id', 1)->doesntExist()) {
             $plans = [
                 [
                     'status' => 1,
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
             foreach ($accounts as $account) {
                 DB::table('accounts')->insert($account);
             }
-        }
+        }*/
     }
 
 }

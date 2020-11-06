@@ -17,16 +17,22 @@ class CheckAccount
      */
     public function handle(Request $request, Closure $next)
     {
-        $account = NULL;
-        if (in_array('auth', $request->route()->middleware())) {
-            $account = (Auth::check())? Auth::user()->accounts->first() : NULL;
-        }else{
-            $host = parse_url(url()->current())['host'];
-            $site = resolve('SiteService')->findByDomain($host);
-            $account = ($site)? $site->accounts->first() : NULL;
+        if (existsAccount()) {
+            if (in_array('auth', $request->route()->middleware())) {
+                $account = NULL;
+                $account = (Auth::check()) ? Auth::user()->accounts->first() : NULL;
+                abort_unless($account, 404);
+                $request->session()->put('account', $account);
+            }
+            /*
+            else {
+                $host = parse_url(url()->current())['host'];
+                $site = resolve('SiteService')->findByDomain($host);
+                $account = ($site) ? $site->accounts->first() : NULL;
+            }
+            dd(Auth::user()->accounts()->first());
+            */
         }
-        abort_unless($account, 404);
-        $request->session()->put('account', $account);
 
         return $next($request);
     }

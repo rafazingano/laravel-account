@@ -5,7 +5,7 @@ namespace ConfrariaWeb\Account\Observers;
 use ConfrariaWeb\Acl\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
-class RoleObserver
+class RoleAccountObserver
 {
 
     /**
