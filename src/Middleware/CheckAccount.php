@@ -3,8 +3,8 @@
 namespace ConfrariaWeb\Account\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class CheckAccount
 {
@@ -15,25 +15,16 @@ class CheckAccount
      * @param \Closure $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        if (existsAccount()) {
-            if (in_array('auth', $request->route()->middleware())) {
-                $account = NULL;
-                $account = (Auth::check()) ? Auth::user()->accounts->first() : NULL;
-                abort_unless($account, 404);
-                $request->session()->put('account', $account);
-            }
-            /*
-            else {
-                $host = parse_url(url()->current())['host'];
-                $site = resolve('SiteService')->findByDomain($host);
-                $account = ($site) ? $site->accounts->first() : NULL;
-            }
-            dd(Auth::user()->accounts()->first());
-            */
+        if (
+            existsAccount() &&
+            in_array('auth', $request->route()->middleware()) &&
+            !account()
+        ){
+            Auth::logout();
+            return redirect('login');
         }
-
         return $next($request);
     }
 }

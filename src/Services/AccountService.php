@@ -4,8 +4,11 @@ namespace ConfrariaWeb\Account\Services;
 
 use Carbon\Carbon;
 use ConfrariaWeb\Account\Contracts\AccountContract;
+use ConfrariaWeb\Account\Notifications\AccountCreated;
 use ConfrariaWeb\Vendor\Traits\ServiceTrait;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use kamermans\OAuth2\Utils\Collection;
 
 class AccountService
 {
@@ -14,6 +17,34 @@ class AccountService
     public function __construct(AccountContract $account)
     {
         $this->obj = $account;
+    }
+
+    public function prepareData(array $data, $obj = NULL)
+    {
+        $data['parent_id'] = Auth::id();
+        $data['password'] = Hash::make('secret');
+        return $data;
+    }
+
+    public function executeBefore(array $data)
+    {
+        $objUser = resolve('UserService')->create($data);
+        if(!$objUser->has('obj') || $objUser->get('obj') === NULL){
+            return collect([
+                'error' => true,
+                'status' => 'Erro ao criar o usuário'
+            ]);
+        }
+        $this->data['sync']['user_id'] = $objUser->get('obj')->id;
+        return collect(['error' => false]);
+    }
+
+    public function executeAfter(array $data, $obj = NULL)
+    {
+        foreach($obj->users as $user){
+            //$user->notify(new AccountCreated());
+        }
+        return $obj;
     }
 
     public function generateInvoices(){

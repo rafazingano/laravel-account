@@ -15,7 +15,25 @@ class StoreAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
+            'name' => 'required',
+            'email' => 'required|unique:App\Models\User,email',
+            'plan_id' => 'required',
+            'status' => 'required',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'O nome é obrigatório',
+            'email.required' => 'O email é obrigatório',
+            'plan_id.required' => 'O plano é obrigatório',
+            'status.required' => 'O status é obrigatório',
         ];
     }
 

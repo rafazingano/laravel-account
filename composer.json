@@ -32,8 +32,9 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ConfrariaWeb\\Account\\Providers\\AccountServiceProvider",
-                "ConfrariaWeb\\Account\\Providers\\AccountEventServiceProvider"
+                "ConfrariaWeb\\Account\\Providers\\AccountAuthServiceProvider",
+                "ConfrariaWeb\\Account\\Providers\\AccountEventServiceProvider",
+                "ConfrariaWeb\\Account\\Providers\\AccountServiceProvider"
             ]
         }
     },

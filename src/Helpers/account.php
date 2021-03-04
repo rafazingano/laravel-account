@@ -1,12 +1,13 @@
 <?php
+/**
+ * Deve retornar o accont sem fazer nenhuma consulta
+ * Tera de ser implementado ainda a busca pela url para quando nao existir na session
+ */
 if (!function_exists('account')) {
     function account()
     {
-        $account = \Illuminate\Support\Facades\Session::get('account');
-        if (!$account) {
-            $account_id = Config::get('cw_account.default.account');
-            $account = isset($account_id) ? resolve('AccountService')->find($account_id) : NULL;
-        }
-        return $account;
+        //$account = \Illuminate\Support\Facades\Session::get('account');
+        $account = \Illuminate\Support\Facades\Cache::get('account');
+        return $account?? false;
     }
 }

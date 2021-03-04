@@ -6,6 +6,7 @@ use App\Models\User;
 use ConfrariaWeb\Account\Commands\GenerateInvoices;
 use ConfrariaWeb\Account\Contracts\AccountContract;
 use ConfrariaWeb\Account\Contracts\PlanContract;
+use ConfrariaWeb\Account\Observers\DomainAccountObserver;
 use ConfrariaWeb\Account\Observers\PostAccountObserver;
 use ConfrariaWeb\Account\Observers\PostCategoryAccountObserver;
 use ConfrariaWeb\Account\Observers\PostSectionAccountObserver;
@@ -17,6 +18,7 @@ use ConfrariaWeb\Account\Repositories\PlanRepository;
 use ConfrariaWeb\Account\Services\AccountService;
 use ConfrariaWeb\Account\Services\PlanService;
 use ConfrariaWeb\Acl\Models\Role;
+use ConfrariaWeb\Domain\Models\Domain;
 use ConfrariaWeb\Post\Models\Post;
 use ConfrariaWeb\Post\Models\PostCategory;
 use ConfrariaWeb\Post\Models\PostSection;
@@ -37,6 +39,7 @@ class AccountServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../../config/cw_account.php' => config_path('cw_account.php')], 'config');
         //$this->registerSeedsFrom(__DIR__ . '/../../databases/Seeds');
 
+        Domain::observe(DomainAccountObserver::class);
         Post::observe(PostAccountObserver::class);
         PostCategory::observe(PostCategoryAccountObserver::class);
         PostSection::observe(PostSectionAccountObserver::class);

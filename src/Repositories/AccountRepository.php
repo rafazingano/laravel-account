@@ -15,4 +15,9 @@ class AccountRepository implements AccountContract
         $this->obj = $account;
     }
 
+    public function sync($obj, array $data)
+    {
+        $obj->users()->sync($data);
+    }
+
 }
