@@ -4,9 +4,8 @@ namespace ConfrariaWeb\Account\Observers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
 
-class UserAccountObserver
+class UserObserver
 {
 
     /**
@@ -17,7 +16,23 @@ class UserAccountObserver
      */
     public function creating(User $user)
     {
-
+        /*
+        $accounts = request()->accounts;
+        $account = account();
+        $account_id = $account? $account->id : NULL;
+        $plan_id = request()->plan_id?? Config::get('cw_account.default.plan');
+        if(!$accounts){
+            $a = resolve('AccountService')->create([
+                'parent_id' => $account_id,
+                'plan_id' => $plan_id
+            ]);
+            if(!$a->get('error')){
+                $accounts[] = $a->get('obj')->id;
+            }
+        }
+        //$user->setAttribute('accounts', $accounts?? NULL);
+        //request()->accounts = $accounts?? NULL;
+        */
     }
 
 
@@ -29,10 +44,16 @@ class UserAccountObserver
      */
     public function created(User $user)
     {
-        $account = Session::get('account');
-        $account_id = isset($account) ? $account->id : Config::get('cw_account.default.account');
-        if ($account_id) {
-            $user->accounts()->sync($account_id);
+        if($user->accounts->isEmpty()){
+            $account = account();
+            $plan_id = request()->plan_id?? Config::get('cw_account.default.plan');
+            $a = resolve('AccountService')->create([
+                'parent_id' => $account->id?? NULL,
+                'plan_id' => $plan_id
+            ]);
+            if(!$a->get('error')){
+                $user->accounts()->sync($a->get('obj')->id);
+            }
         }
     }
 

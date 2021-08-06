@@ -6,7 +6,6 @@
 if (!function_exists('account')) {
     function account()
     {
-        //$account = \Illuminate\Support\Facades\Session::get('account');
         $account = \Illuminate\Support\Facades\Cache::get('account');
         return $account?? false;
     }

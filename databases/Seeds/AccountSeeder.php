@@ -16,7 +16,7 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        /*if (DB::table('account_plans')->where('id', 1)->doesntExist()) {
+        if (DB::table('account_plans')->where('id', 1)->doesntExist()) {
             $plans = [
                 [
                     'status' => 1,
@@ -40,7 +40,7 @@ class AccountSeeder extends Seeder
             }
         }
 
-        if (DB::table('accounts')->where('id', 1)->doesntExist()) {
+        /*if (DB::table('accounts')->where('id', 1)->doesntExist()) {
             $accounts = [
                 [
                     'status' => 1,

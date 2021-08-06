@@ -13,7 +13,7 @@ class CreateAccountPostTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_post', function (Blueprint $table) {
+        /*Schema::create('account_post', function (Blueprint $table) {
             $table->unsignedBigInteger('account_id');
             $table->unsignedBigInteger('post_id');
             $table->foreign('account_id')
@@ -53,7 +53,7 @@ class CreateAccountPostTable extends Migration
                 ->on('post_categories')
                 ->onDelete('cascade');
             $table->primary(['account_id', 'category_id']);
-        });
+        });*/
     }
 
     /**
@@ -63,8 +63,8 @@ class CreateAccountPostTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account_post');
+        /*Schema::dropIfExists('account_post');
         Schema::dropIfExists('account_post_section');
-        Schema::dropIfExists('account_post_category');
+        Schema::dropIfExists('account_post_category');*/
     }
 }

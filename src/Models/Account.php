@@ -12,7 +12,9 @@ class Account extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'plan_id'
+        'plan_id',
+        'parent_id',
+        'status'
     ];
 
     /**

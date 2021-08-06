@@ -28,7 +28,7 @@ class CreateAccountsTable extends Migration
 
             $table->foreign('parent_id')
                 ->references('id')
-                ->on('users')
+                ->on('accounts')
                 ->onDelete('cascade');
         });
     }
