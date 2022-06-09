@@ -2,7 +2,6 @@
 
 namespace ConfrariaWeb\Account\Models;
 
-use ConfrariaWeb\Account\Scopes\ParentScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -17,16 +16,6 @@ class Account extends Model
         'status'
     ];
 
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new ParentScope);
-    }
-
     public function plan()
     {
         return $this->belongsTo('ConfrariaWeb\Account\Models\Plan');
@@ -34,7 +23,7 @@ class Account extends Model
     
     public function users()
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this->hasMany('App\Models\User');
     }
 
 }

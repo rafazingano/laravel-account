@@ -17,14 +17,28 @@ class CheckAccount
      */
     public function handle($request, Closure $next)
     {
+        $routeMiddleware = $request->route()->middleware();
+        //$getRouteName = $request->route()->getName();
+        $account = account();
+
+        /*** Verifica se o usuario é vinculado a alguma conta */
         if (
-            existsAccount() &&
-            in_array('auth', $request->route()->middleware()) &&
-            !account()
+            in_array("ConfrariaWeb\Account\Providers\AccountServiceProvider", get_declared_classes()) &&
+            in_array('auth', $routeMiddleware) &&
+            !$account
         ){
             Auth::logout();
             return redirect('login');
         }
+
+        /*** Verifica se a conta esta ativa */
+        if (
+            in_array("ConfrariaWeb\Account\Providers\AccountServiceProvider", get_declared_classes()) &&
+            in_array('auth', $routeMiddleware)
+        ){
+            abort_unless($account->status, 401, 'Conta bloqueada');
+        }
+
         return $next($request);
     }
 }

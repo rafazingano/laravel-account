@@ -14,22 +14,10 @@ class CreateAccountsTable extends Migration
     public function up()
     {
         Schema::create('accounts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('plan_id');
-            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->id();
             $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
-            
-            $table->foreign('plan_id')
-                ->references('id')
-                ->on('account_plans')
-                ->onDelete('cascade');
-
-            $table->foreign('parent_id')
-                ->references('id')
-                ->on('accounts')
-                ->onDelete('cascade');
         });
     }
 
@@ -39,7 +27,7 @@ class CreateAccountsTable extends Migration
      * @return void
      */
     public function down()
-    {
+    {     
         Schema::dropIfExists('accounts');
     }
 }

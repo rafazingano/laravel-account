@@ -16,14 +16,8 @@
         }
     ],
     "require": {
-        "confrariaweb/laravel-user": "dev-master",
-        "confrariaweb/laravel-vendor": "dev-master",
-        "laravelcollective/html": ">=6.0"
     },
     "autoload": {
-        "files": [
-            "src/Helpers/account.php"
-        ],
         "psr-4": {
             "ConfrariaWeb\\Account\\": "src",
             "ConfrariaWeb\\Account\\Databases\\Seeds\\": "databases/Seeds"

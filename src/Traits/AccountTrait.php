@@ -4,8 +4,8 @@ namespace ConfrariaWeb\Account\Traits;
 
 trait AccountTrait
 {
-    public function accounts()
+    public function account()
     {
-        return $this->belongsToMany('ConfrariaWeb\Account\Models\Account');
+        return $this->belongsTo('ConfrariaWeb\Account\Models\Account');
     }
 }
