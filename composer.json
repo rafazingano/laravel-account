@@ -1,6 +1,6 @@
 {
     "name": "confrariaweb/laravel-account",
-    "version": "dev-master",
+    "version": "1.0.0",
     "description": "Laravel account package",
     "keywords": [
         "account",
@@ -16,18 +16,18 @@
         }
     ],
     "require": {
+        "confrariaweb/laravel-financial": "1.0.0",
+        "confrariaweb/laravel-plan": "1.0.0",
+        "confrariaweb/laravel-user": "1.0.0"
     },
     "autoload": {
         "psr-4": {
-            "ConfrariaWeb\\Account\\": "src",
-            "ConfrariaWeb\\Account\\Databases\\Seeds\\": "databases/Seeds"
+            "ConfrariaWeb\\Account\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "ConfrariaWeb\\Account\\Providers\\AccountAuthServiceProvider",
-                "ConfrariaWeb\\Account\\Providers\\AccountEventServiceProvider",
                 "ConfrariaWeb\\Account\\Providers\\AccountServiceProvider"
             ]
         }
