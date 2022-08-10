@@ -16,7 +16,6 @@
         }
     ],
     "require": {
-        "confrariaweb/laravel-financial": "1.0.0",
         "confrariaweb/laravel-plan": "1.0.0",
         "confrariaweb/laravel-user": "1.0.0"
     },
